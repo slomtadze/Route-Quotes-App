@@ -1,6 +1,6 @@
 import React from 'react'
 import { Fragment } from 'react'
-import { Route, useParams } from 'react-router-dom'
+import { Link, Route, useParams } from 'react-router-dom'
 import Comments from '../components/comments/Comments'
 import HighlightedQuote from './../components/quotes/HighlightedQuote'
 
@@ -20,7 +20,18 @@ const QuotesDetails = () => {
 
   return (
     <Fragment>
-      <HighlightedQuote text={quote.text} author={quote.author}/>
+      <HighlightedQuote 
+        text={quote.text} 
+        author={quote.author}
+      />
+      <Route path={`/quotes/${params.qouteID}`} exact>
+        <div className='centered'>
+          <Link className='btn--flat' 
+            to={`/quotes/${params.qouteID}/comments`}> 
+              Add New Comment
+          </Link>
+        </div>
+      </Route>
       <Route path={`/quotes/${params.qouteID}/comments`}>
         <Comments />
       </Route>
